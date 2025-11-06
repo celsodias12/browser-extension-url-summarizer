@@ -1,4 +1,4 @@
-# Utils - Browser Extension
+# URL Summarize
 
 A Chrome browser extension built with React, TypeScript, and Vite that displays the current tab URL and provides quick access to summarize pages using ChatGPT.
 
@@ -28,7 +28,7 @@ A Chrome browser extension built with React, TypeScript, and Vite that displays 
 1. Clone the repository:
 ```bash
 git clone <repository-url>
-cd utils
+cd url-summarizer
 ```
 
 2. Install dependencies:
@@ -64,7 +64,7 @@ The built extension will be in the `dist` folder, and a zip file will be created
 ## Project Structure
 
 ```
-utils/
+url-summarizer/
 ├── src/
 │   ├── App.tsx          # Main application component
 │   ├── main.tsx         # Application entry point
