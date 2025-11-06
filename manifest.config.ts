@@ -11,14 +11,14 @@ export default defineManifest({
   action: {
     default_popup: 'index.html',
     default_icon: {
-      16: 'vite.svg',
-      48: 'vite.svg',
-      128: 'vite.svg',
+      16: 'icon.svg',
+      48: 'icon.svg',
+      128: 'icon.svg',
     },
   },
   icons: {
-    16: 'vite.svg',
-    48: 'vite.svg',
-    128: 'vite.svg',
+    16: 'icon.svg',
+    48: 'icon.svg',
+    128: 'icon.svg',
   },
 })
