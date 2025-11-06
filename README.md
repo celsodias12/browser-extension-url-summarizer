@@ -26,12 +26,14 @@ A Chrome browser extension built with React, TypeScript, and Vite that displays 
 ## Installation
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd url-summarizer
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
@@ -39,6 +41,7 @@ npm install
 ## Development
 
 1. Start the development server:
+
 ```bash
 npm run dev
 ```
@@ -63,7 +66,7 @@ The built extension will be in the `dist` folder, and a zip file will be created
 
 ## Project Structure
 
-```
+```text
 url-summarizer/
 ├── src/
 │   ├── App.tsx          # Main application component
