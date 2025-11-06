@@ -1,75 +1,104 @@
-# React + TypeScript + Vite
+# Utils - Browser Extension
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Chrome browser extension built with React, TypeScript, and Vite that displays the current tab URL and provides quick access to summarize pages using ChatGPT.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 📍 **Current Tab URL Display**: Automatically shows the URL of the currently active browser tab
+- 🤖 **ChatGPT Integration**: One-click button to open ChatGPT with a pre-filled prompt to summarize the current page in Portuguese
+- 🎨 **Dark Mode UI**: Beautiful dark-themed interface built with Tailwind CSS
+- ⚡ **Fast & Modern**: Built with React 19, TypeScript, and Vite for optimal performance
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+- **React 19** - UI library
+- **TypeScript** - Type safety
+- **Vite** - Build tool and dev server
+- **Tailwind CSS v4** - Styling
+- **@crxjs/vite-plugin** - Chrome extension development
+- **ESLint** - Code linting
 
-Note: This will impact Vite dev & build performances.
+## Prerequisites
 
-## Expanding the ESLint configuration
+- Node.js 18+ and npm
+- Chrome browser (for testing)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Installation
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd utils
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. Install dependencies:
+```bash
+npm install
 ```
+
+## Development
+
+1. Start the development server:
+```bash
+npm run dev
+```
+
+2. Load the extension in Chrome:
+   - Open Chrome and navigate to `chrome://extensions/`
+   - Enable "Developer mode" (toggle in the top right)
+   - Click "Load unpacked"
+   - Select the `dist` folder from the project directory
+
+3. The extension popup will be available in your Chrome toolbar
+
+## Building
+
+Build the extension for production:
+
+```bash
+npm run build
+```
+
+The built extension will be in the `dist` folder, and a zip file will be created in the `release` folder.
+
+## Project Structure
+
+```
+utils/
+├── src/
+│   ├── App.tsx          # Main application component
+│   ├── main.tsx         # Application entry point
+│   └── main.css         # Global styles
+├── manifest.config.ts   # Chrome extension manifest
+├── vite.config.ts       # Vite configuration
+├── package.json         # Dependencies and scripts
+└── tsconfig.json        # TypeScript configuration
+```
+
+## Permissions
+
+The extension requires the following permissions:
+
+- `tabs` - To access and query information about browser tabs
+
+## Usage
+
+1. Click the extension icon in your Chrome toolbar
+2. The popup will display the current tab's URL
+3. Click "Summarize on ChatGPT" to open ChatGPT with a pre-filled prompt containing the current URL and a request to summarize in Portuguese
+
+## Scripts
+
+- `npm run dev` - Start development server with hot reload
+- `npm run build` - Build for production
+- `npm run lint` - Run ESLint
+- `npm run preview` - Preview production build
+
+## Browser Compatibility
+
+- Chrome (Manifest V3)
+- Other Chromium-based browsers (Edge, Brave, etc.)
+
+## License
+
+Private project
