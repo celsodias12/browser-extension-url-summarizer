@@ -10,24 +10,10 @@ export default defineManifest({
   action: {
     default_popup: 'index.html',
     default_icon: {
-      16: 'icon.svg',
-      32: 'icon.svg',
-      48: 'icon.svg',
-      64: 'icon.svg',
-      96: 'icon.svg',
-      128: 'icon.svg',
-      192: 'icon.svg',
-      512: 'icon.svg',
+      48: 'icon.png',
     },
   },
   icons: {
-    16: 'icon.svg',
-    32: 'icon.svg',
-    48: 'icon.svg',
-    64: 'icon.svg',
-    96: 'icon.svg',
-    128: 'icon.svg',
-    192: 'icon.svg',
-    512: 'icon.svg',
+    48: 'icon.png',
   },
 })
