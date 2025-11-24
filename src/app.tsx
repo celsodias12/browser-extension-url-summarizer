@@ -64,9 +64,8 @@ export function App() {
 
   const handleOpenAI = () => {
     const prompt = customPrompt.replace('{url}', currentUrl)
-    const encodedPrompt = encodeURIComponent(prompt)
     const baseUrl = 'https://chat.openai.com/'
-    const params = new URLSearchParams({ q: encodedPrompt })
+    const params = new URLSearchParams({ q: prompt })
     if (useTemporaryChat) {
       params.append('temporary-chat', 'true')
     }
