@@ -1,7 +1,7 @@
 {
   "name": "url-summarize",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Chrome extension to quickly summarize any webpage URL using ChatGPT",
   "type": "module",
   "scripts": {
