@@ -78,6 +78,18 @@ export function App() {
     }
   }
 
+  const handleClaude = () => {
+    const prompt = customPrompt.replace('{url}', currentUrl)
+    const params = new URLSearchParams({ q: prompt })
+    const claudeUrl = `https://claude.ai/new?${params.toString()}`
+
+    if (chrome.tabs) {
+      chrome.tabs.create({ url: claudeUrl })
+    } else {
+      window.open(claudeUrl, '_blank')
+    }
+  }
+
   if (showSettings) {
     return (
       <div className="min-w-[500px] p-6 bg-linear-to-br from-slate-900 to-slate-800">
@@ -207,6 +219,17 @@ export function App() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
         </svg>
         Summarize on ChatGPT
+      </button>
+
+      <button
+        onClick={handleClaude}
+        disabled={!currentUrl}
+        className="mt-3 w-full bg-orange-600 hover:bg-orange-700 disabled:bg-slate-700 disabled:cursor-not-allowed text-white font-semibold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+      >
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+        </svg>
+        Summarize on Claude
       </button>
     </div>
   )
