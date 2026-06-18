@@ -15,7 +15,13 @@ export default defineConfig({
     }),
     tailwindcss(),
     crx({ manifest }),
-    zip({ outDir: 'release', outFileName: 'release.zip' }),
+    zip({
+      outDir: 'release',
+      outFileName: 'release.zip',
+      // Exclude Vite's internal build manifest — not used by the published extension
+      filter: (fileName, filePath) =>
+        fileName !== '.vite' && !filePath.includes('/.vite/'),
+    }),
   ],
   server: {
     cors: {
