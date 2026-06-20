@@ -5,7 +5,7 @@ export default defineManifest({
   name: 'URL Summarize',
   short_name: 'URL Summarize',
   description: 'Quickly summarize any webpage URL with ChatGPT or Claude. View the current tab URL and send it with a customizable prompt.',
-  version: '1.3.0',
+  version: '1.3.1',
   permissions: ['tabs', 'storage'],
   action: {
     default_popup: 'index.html',
