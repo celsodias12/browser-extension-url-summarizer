@@ -4,6 +4,7 @@ const DEFAULT_PROMPT = '{url} summarize'
 
 export function App() {
   const [currentUrl, setCurrentUrl] = useState('')
+  const [currentTabIndex, setCurrentTabIndex] = useState<number | null>(null)
   const [customPrompt, setCustomPrompt] = useState(DEFAULT_PROMPT)
   const [useTemporaryChat, setUseTemporaryChat] = useState(true)
   const [useIncognitoClaude, setUseIncognitoClaude] = useState(false)
@@ -16,6 +17,9 @@ export function App() {
           const tabs = await chrome.tabs.query({ active: true, currentWindow: true })
           if (tabs[0]?.url) {
             setCurrentUrl(tabs[0].url)
+          }
+          if (tabs[0]?.index !== undefined) {
+            setCurrentTabIndex(tabs[0].index)
           }
         } else {
           console.error('Chrome API not available')
@@ -76,7 +80,10 @@ export function App() {
     const openAIUrl = `${baseUrl}?${params.toString()}`
 
     if (chrome.tabs) {
-      chrome.tabs.create({ url: openAIUrl })
+      chrome.tabs.create({
+        url: openAIUrl,
+        index: currentTabIndex !== null ? currentTabIndex + 1 : undefined,
+      })
     } else {
       window.open(openAIUrl, '_blank')
     }
@@ -91,7 +98,10 @@ export function App() {
     const claudeUrl = `https://claude.ai/new?${params.toString()}`
 
     if (chrome.tabs) {
-      chrome.tabs.create({ url: claudeUrl })
+      chrome.tabs.create({
+        url: claudeUrl,
+        index: currentTabIndex !== null ? currentTabIndex + 1 : undefined,
+      })
     } else {
       window.open(claudeUrl, '_blank')
     }
