@@ -6,6 +6,7 @@ export function App() {
   const [currentUrl, setCurrentUrl] = useState('')
   const [customPrompt, setCustomPrompt] = useState(DEFAULT_PROMPT)
   const [useTemporaryChat, setUseTemporaryChat] = useState(true)
+  const [useIncognitoClaude, setUseIncognitoClaude] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
 
   useEffect(() => {
@@ -31,12 +32,15 @@ export function App() {
     const loadSettings = async () => {
       try {
         if (chrome.storage) {
-          const result = await chrome.storage.sync.get(['customPrompt', 'useTemporaryChat'])
+          const result = await chrome.storage.sync.get(['customPrompt', 'useTemporaryChat', 'useIncognitoClaude'])
           if (result.customPrompt) {
             setCustomPrompt(result.customPrompt)
           }
           if (result.useTemporaryChat !== undefined) {
             setUseTemporaryChat(result.useTemporaryChat)
+          }
+          if (result.useIncognitoClaude !== undefined) {
+            setUseIncognitoClaude(result.useIncognitoClaude)
           }
         }
       } catch (error) {
@@ -50,7 +54,7 @@ export function App() {
   const saveSettings = async () => {
     try {
       if (chrome.storage) {
-        await chrome.storage.sync.set({ customPrompt, useTemporaryChat })
+        await chrome.storage.sync.set({ customPrompt, useTemporaryChat, useIncognitoClaude })
         setShowSettings(false)
       }
     } catch (error) {
@@ -81,6 +85,9 @@ export function App() {
   const handleClaude = () => {
     const prompt = customPrompt.replace('{url}', currentUrl)
     const params = new URLSearchParams({ q: prompt })
+    if (useIncognitoClaude) {
+      params.append('incognito', 'true')
+    }
     const claudeUrl = `https://claude.ai/new?${params.toString()}`
 
     if (chrome.tabs) {
@@ -157,6 +164,31 @@ export function App() {
               <span
                 className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
                   useTemporaryChat ? 'translate-x-6' : 'translate-x-1'
+                }`}
+              />
+            </button>
+          </div>
+        </div>
+
+        <div className="mt-4 bg-slate-800 rounded-lg shadow-lg border border-slate-700 p-4">
+          <div className="flex items-center justify-between">
+            <div className="flex-1">
+              <label className="block text-sm font-semibold text-slate-300 mb-1">
+                Use Incognito Chat
+              </label>
+              <p className="text-xs text-slate-400">
+                Open Claude in an incognito chat (not saved to history)
+              </p>
+            </div>
+            <button
+              onClick={() => setUseIncognitoClaude(!useIncognitoClaude)}
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-800 ${
+                useIncognitoClaude ? 'bg-blue-500' : 'bg-slate-600'
+              }`}
+            >
+              <span
+                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                  useIncognitoClaude ? 'translate-x-6' : 'translate-x-1'
                 }`}
               />
             </button>
